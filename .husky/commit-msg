@@ -1,1 +1,1 @@
-# commitlint added in issue #50
+pnpm commitlint --edit "$1"
