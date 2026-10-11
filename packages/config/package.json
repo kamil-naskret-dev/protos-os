@@ -7,7 +7,9 @@
     "./eslint/base": "./eslint/base.js",
     "./eslint/next": "./eslint/next.js",
     "./eslint/react": "./eslint/react.js",
-    "./prettier": "./prettier/index.js"
+    "./prettier": "./prettier/index.js",
+    "./tsconfig/base.json": "./tsconfig/base.json",
+    "./tsconfig/react-library.json": "./tsconfig/react-library.json"
   },
   "devDependencies": {
     "eslint": "^10.0.0",
