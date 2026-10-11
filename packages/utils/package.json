@@ -2,6 +2,7 @@
   "name": "@protos/utils",
   "version": "0.0.0",
   "private": true,
+  "type": "module",
   "main": "./src/index.ts",
   "types": "./src/index.ts",
   "exports": {
@@ -9,12 +10,15 @@
   },
   "scripts": {
     "type-check": "tsc --noEmit",
+    "lint": "eslint src --max-warnings 0",
     "test": "vitest run"
   },
   "dependencies": {
     "@protos/types": "workspace:*"
   },
   "devDependencies": {
+    "@protos/config": "workspace:*",
+    "eslint": "^10.0.0",
     "typescript": "^5.8.3",
     "vitest": "^3.2.4"
   }

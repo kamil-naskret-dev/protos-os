@@ -1,0 +1,17 @@
+{
+  "name": "@protos/config",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./eslint/base": "./eslint/base.js",
+    "./eslint/next": "./eslint/next.js",
+    "./eslint/react": "./eslint/react.js"
+  },
+  "devDependencies": {
+    "eslint": "^10.0.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "typescript-eslint": "^8.71.1"
+  }
+}
