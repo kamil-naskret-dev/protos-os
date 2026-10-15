@@ -11,6 +11,10 @@
     "type-check": "turbo type-check",
     "format": "prettier --write \"**/*.{ts,tsx,css,md,json}\" --ignore-path .gitignore",
     "format:check": "prettier --check \"**/*.{ts,tsx,css,md,json}\" --ignore-path .gitignore",
+    "db:start": "supabase start",
+    "db:stop": "supabase stop",
+    "db:reset": "supabase db reset",
+    "db:types": "supabase gen types typescript --local > packages/types/src/database.ts",
     "prepare": "husky"
   },
   "devDependencies": {
@@ -21,6 +25,7 @@
     "husky": "^9.1.7",
     "lint-staged": "^17.6.0",
     "prettier": "^3.5.3",
+    "supabase": "^2.120.0",
     "turbo": "^2.5.4",
     "typescript": "^5.8.3"
   },
