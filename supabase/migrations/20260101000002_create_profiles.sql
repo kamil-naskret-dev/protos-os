@@ -1,0 +1,33 @@
+create table profiles (
+  id           uuid primary key references auth.users on delete cascade,
+  full_name    text,
+  avatar_url   text,
+  timezone              text not null default 'Europe/Warsaw',
+  locale                text not null default 'pl',
+  currency              text not null default 'PLN',
+  onboarding_completed  boolean not null default false,
+  created_at            timestamptz not null default now(),
+  updated_at   timestamptz not null default now()
+);
+
+create trigger profiles_updated_at
+  before update on profiles
+  for each row execute function update_updated_at();
+
+-- Auto-create profile on signup
+create or replace function handle_new_user()
+returns trigger as $$
+begin
+  insert into profiles (id, full_name, avatar_url)
+  values (
+    new.id,
+    new.raw_user_meta_data->>'full_name',
+    new.raw_user_meta_data->>'avatar_url'
+  );
+  return new;
+end;
+$$ language plpgsql security definer;
+
+create trigger on_auth_user_created
+  after insert on auth.users
+  for each row execute function handle_new_user();
