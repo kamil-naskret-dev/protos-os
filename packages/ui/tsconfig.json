@@ -2,7 +2,11 @@
   "extends": "@protos/config/tsconfig/react-library.json",
   "compilerOptions": {
     "rootDir": "src",
-    "outDir": "dist"
+    "outDir": "dist",
+    "paths": {
+      "@/lib/utils": ["./src/lib/utils.ts"],
+      "@/components/*": ["./src/components/*"]
+    }
   },
   "include": ["src"]
 }

@@ -5,7 +5,10 @@
     "outDir": ".next",
     "plugins": [{ "name": "next" }],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@/components/*": ["../../packages/ui/src/components/*"],
+      "@/lib/utils": ["../../packages/ui/src/lib/utils.ts"],
+      "@/hooks/*": ["./hooks/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
