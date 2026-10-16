@@ -1,3 +1,41 @@
 // Shared TypeScript types for protos-os
 
-export type { Database, Json } from "./database";
+export type { Database, Json, Tables, TablesInsert, TablesUpdate, Enums } from "./database";
+export type {
+  Profile,
+  Area,
+  Activity,
+  Plan,
+  Goal,
+  Habit,
+  HabitCompletion,
+  FinanceCategory,
+  FinanceTransaction,
+  Note,
+  PlanStatus,
+  GoalStatus,
+  HabitFrequency,
+  TransactionType,
+} from "./entities";
+export type {
+  ProfileInsert,
+  ProfileUpdate,
+  AreaInsert,
+  AreaUpdate,
+  ActivityInsert,
+  ActivityUpdate,
+  PlanInsert,
+  PlanUpdate,
+  GoalInsert,
+  GoalUpdate,
+  HabitInsert,
+  HabitUpdate,
+  HabitCompletionInsert,
+  HabitCompletionUpdate,
+  FinanceCategoryInsert,
+  FinanceCategoryUpdate,
+  FinanceTransactionInsert,
+  FinanceTransactionUpdate,
+  NoteInsert,
+  NoteUpdate,
+} from "./api";
