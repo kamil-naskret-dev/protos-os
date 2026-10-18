@@ -8,9 +8,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint . --max-warnings 0",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "test": "vitest run --passWithNoTests"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.9.1",
     "@protos/types": "workspace:*",
     "@protos/ui": "workspace:*",
     "@protos/utils": "workspace:*",
@@ -18,9 +20,12 @@
     "@supabase/supabase-js": "^2.117.3",
     "@tanstack/react-query": "^5.104.3",
     "@tanstack/react-query-devtools": "^5.104.3",
+    "lucide-react": "^1.58.0",
     "next": "^16.4.0",
     "react": "^19.3.0",
-    "react-dom": "^19.3.0"
+    "react-dom": "^19.3.0",
+    "react-hook-form": "^7.90.0",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
     "@protos/config": "workspace:*",
@@ -30,6 +35,7 @@
     "@types/react-dom": "^19.3.0",
     "eslint": "^10.0.0",
     "tailwindcss": "^4.3.3",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "vitest": "^5.0.5"
   }
 }
