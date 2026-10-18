@@ -1,5 +1,8 @@
 import type { NextConfig } from "next";
 
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "";
+const supabaseWs = supabaseUrl.replace(/^https/, "wss").replace(/^http/, "ws");
+
 const securityHeaders = [
   { key: "X-Frame-Options", value: "DENY" },
   { key: "X-Content-Type-Options", value: "nosniff" },
@@ -16,7 +19,7 @@ const securityHeaders = [
       "style-src 'self' 'unsafe-inline'",
       "img-src 'self' blob: data:",
       "font-src 'self'",
-      "connect-src 'self'",
+      `connect-src 'self' ${supabaseUrl} ${supabaseWs}`,
       "frame-ancestors 'none'",
     ].join("; "),
   },
