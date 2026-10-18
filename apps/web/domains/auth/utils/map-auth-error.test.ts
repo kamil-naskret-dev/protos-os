@@ -26,6 +26,12 @@ describe("mapAuthError", () => {
     expect(mapAuthError("Something unexpected happened")).toBe("Wystąpił błąd. Spróbuj ponownie.");
   });
 
+  it("mapuje 'User already registered' na komunikat po polsku", () => {
+    expect(mapAuthError("User already registered")).toBe(
+      "Konto z tym adresem e-mail już istnieje.",
+    );
+  });
+
   it("zwraca fallback dla pustego stringa", () => {
     expect(mapAuthError("")).toBe("Wystąpił błąd. Spróbuj ponownie.");
   });
