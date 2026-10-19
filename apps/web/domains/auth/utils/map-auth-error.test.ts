@@ -35,4 +35,10 @@ describe("mapAuthError", () => {
   it("zwraca fallback dla pustego stringa", () => {
     expect(mapAuthError("")).toBe("Wystąpił błąd. Spróbuj ponownie.");
   });
+
+  it("mapuje 'Password should be different from old password' na komunikat po polsku", () => {
+    expect(mapAuthError("Password should be different from old password")).toBe(
+      "Nowe hasło musi różnić się od poprzedniego.",
+    );
+  });
 });

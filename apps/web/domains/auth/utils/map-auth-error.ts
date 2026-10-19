@@ -3,6 +3,7 @@ const AUTH_ERRORS = new Map<string, string>([
   ["Email not confirmed", "Potwierdź swój adres e-mail przed zalogowaniem."],
   ["Too many requests", "Zbyt wiele prób. Spróbuj ponownie za chwilę."],
   ["User already registered", "Konto z tym adresem e-mail już istnieje."],
+  ["Password should be different from old password", "Nowe hasło musi różnić się od poprzedniego."],
 ]);
 
 const FALLBACK_ERROR = "Wystąpił błąd. Spróbuj ponownie.";
