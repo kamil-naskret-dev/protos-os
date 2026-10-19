@@ -21,6 +21,17 @@ export const resetPasswordSchema = z.object({
   email: z.string().email("Podaj poprawny adres e-mail"),
 });
 
+export const newPasswordSchema = z
+  .object({
+    password: z.string().min(8, "Hasło musi mieć co najmniej 8 znaków"),
+    confirmPassword: z.string(),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    path: ["confirmPassword"],
+    message: "Hasła muszą być identyczne",
+  });
+
 export type LoginFormValues = z.infer<typeof loginSchema>;
 export type RegisterFormValues = z.infer<typeof registerSchema>;
 export type ResetPasswordFormValues = z.infer<typeof resetPasswordSchema>;
+export type NewPasswordFormValues = z.infer<typeof newPasswordSchema>;

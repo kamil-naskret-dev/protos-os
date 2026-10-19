@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { loginSchema, registerSchema, resetPasswordSchema } from "./schemas";
+import { loginSchema, newPasswordSchema, registerSchema, resetPasswordSchema } from "./schemas";
 
 describe("loginSchema", () => {
   it("przepuszcza poprawne dane", () => {
@@ -72,5 +72,33 @@ describe("resetPasswordSchema", () => {
   it("odrzuca niepoprawny e-mail", () => {
     const result = resetPasswordSchema.safeParse({ email: "invalid" });
     expect(result.success).toBe(false);
+  });
+});
+
+describe("newPasswordSchema", () => {
+  it("przepuszcza poprawne dane z pasującymi hasłami", () => {
+    const result = newPasswordSchema.safeParse({
+      password: "newpassword1",
+      confirmPassword: "newpassword1",
+    });
+    expect(result.success).toBe(true);
+  });
+
+  it("odrzuca gdy hasła się różnią", () => {
+    const result = newPasswordSchema.safeParse({
+      password: "newpassword1",
+      confirmPassword: "different",
+    });
+    expect(result.success).toBe(false);
+    expect(result.error?.issues[0]?.path).toContain("confirmPassword");
+  });
+
+  it("odrzuca hasło krótsze niż 8 znaków", () => {
+    const result = newPasswordSchema.safeParse({
+      password: "short",
+      confirmPassword: "short",
+    });
+    expect(result.success).toBe(false);
+    expect(result.error?.issues[0]?.path).toContain("password");
   });
 });
