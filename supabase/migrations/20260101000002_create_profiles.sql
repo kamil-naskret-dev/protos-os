@@ -18,15 +18,19 @@ create trigger profiles_updated_at
 create or replace function handle_new_user()
 returns trigger as $$
 begin
-  insert into profiles (id, full_name, avatar_url)
+  insert into public.profiles (id, full_name, avatar_url)
   values (
     new.id,
     new.raw_user_meta_data->>'full_name',
     new.raw_user_meta_data->>'avatar_url'
-  );
+  )
+  on conflict (id) do nothing;
   return new;
+exception
+  when others then
+    return new;
 end;
-$$ language plpgsql security definer;
+$$ language plpgsql security definer set search_path = public;
 
 create trigger on_auth_user_created
   after insert on auth.users
