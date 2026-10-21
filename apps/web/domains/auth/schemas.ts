@@ -1,15 +1,22 @@
 import { z } from "zod";
 
+const passwordSchema = z
+  .string()
+  .min(12, "Hasło musi mieć co najmniej 12 znaków")
+  .regex(/[a-z]/, "Hasło musi zawierać małą literę")
+  .regex(/[A-Z]/, "Hasło musi zawierać wielką literę")
+  .regex(/[0-9]/, "Hasło musi zawierać cyfrę");
+
 export const loginSchema = z.object({
   email: z.string().email("Podaj poprawny adres e-mail"),
-  password: z.string().min(6, "Hasło musi mieć co najmniej 6 znaków"),
+  password: z.string().min(1, "Podaj hasło"),
   rememberMe: z.boolean(),
 });
 
 export const registerSchema = z
   .object({
     email: z.string().email("Podaj poprawny adres e-mail"),
-    password: z.string().min(8, "Hasło musi mieć co najmniej 8 znaków"),
+    password: passwordSchema,
     confirmPassword: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {
@@ -23,7 +30,7 @@ export const resetPasswordSchema = z.object({
 
 export const newPasswordSchema = z
   .object({
-    password: z.string().min(8, "Hasło musi mieć co najmniej 8 znaków"),
+    password: passwordSchema,
     confirmPassword: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {

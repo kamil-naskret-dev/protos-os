@@ -9,12 +9,13 @@ export function useSignUp() {
   const [serverError, setServerError] = useState<string | null>(null);
   const [emailSent, setEmailSent] = useState(false);
 
-  async function signUp(values: RegisterFormValues): Promise<boolean> {
+  async function signUp(values: RegisterFormValues, captchaToken?: string): Promise<boolean> {
     setServerError(null);
     const supabase = createClient();
     const { error } = await supabase.auth.signUp({
       email: values.email,
       password: values.password,
+      ...(captchaToken && { options: { captchaToken } }),
     });
 
     if (error) {

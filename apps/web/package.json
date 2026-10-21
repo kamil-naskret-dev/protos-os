@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^5.9.1",
+    "@marsidev/react-turnstile": "^1.6.2",
     "@protos/types": "workspace:*",
     "@protos/ui": "workspace:*",
     "@protos/utils": "workspace:*",
