@@ -5,7 +5,7 @@ describe("loginSchema", () => {
   it("przepuszcza poprawne dane", () => {
     const result = loginSchema.safeParse({
       email: "user@example.com",
-      password: "secret123",
+      password: "anypassword",
       rememberMe: true,
     });
     expect(result.success).toBe(true);
@@ -14,17 +14,17 @@ describe("loginSchema", () => {
   it("odrzuca niepoprawny e-mail", () => {
     const result = loginSchema.safeParse({
       email: "not-an-email",
-      password: "secret123",
+      password: "anypassword",
       rememberMe: false,
     });
     expect(result.success).toBe(false);
     expect(result.error?.issues[0]?.path).toContain("email");
   });
 
-  it("odrzuca hasło krótsze niż 6 znaków", () => {
+  it("odrzuca puste hasło", () => {
     const result = loginSchema.safeParse({
       email: "user@example.com",
-      password: "123",
+      password: "",
       rememberMe: true,
     });
     expect(result.success).toBe(false);
@@ -36,8 +36,8 @@ describe("registerSchema", () => {
   it("przepuszcza poprawne dane z pasującymi hasłami", () => {
     const result = registerSchema.safeParse({
       email: "user@example.com",
-      password: "strongpass",
-      confirmPassword: "strongpass",
+      password: "StrongPass123",
+      confirmPassword: "StrongPass123",
     });
     expect(result.success).toBe(true);
   });
@@ -45,18 +45,38 @@ describe("registerSchema", () => {
   it("odrzuca gdy hasła się różnią", () => {
     const result = registerSchema.safeParse({
       email: "user@example.com",
-      password: "strongpass",
+      password: "StrongPass123",
       confirmPassword: "different",
     });
     expect(result.success).toBe(false);
     expect(result.error?.issues[0]?.path).toContain("confirmPassword");
   });
 
-  it("odrzuca hasło krótsze niż 8 znaków", () => {
+  it("odrzuca hasło krótsze niż 12 znaków", () => {
     const result = registerSchema.safeParse({
       email: "user@example.com",
-      password: "short",
-      confirmPassword: "short",
+      password: "Short1",
+      confirmPassword: "Short1",
+    });
+    expect(result.success).toBe(false);
+    expect(result.error?.issues[0]?.path).toContain("password");
+  });
+
+  it("odrzuca hasło bez wielkiej litery", () => {
+    const result = registerSchema.safeParse({
+      email: "user@example.com",
+      password: "alllowercase1",
+      confirmPassword: "alllowercase1",
+    });
+    expect(result.success).toBe(false);
+    expect(result.error?.issues[0]?.path).toContain("password");
+  });
+
+  it("odrzuca hasło bez cyfry", () => {
+    const result = registerSchema.safeParse({
+      email: "user@example.com",
+      password: "NoDigitsHere",
+      confirmPassword: "NoDigitsHere",
     });
     expect(result.success).toBe(false);
     expect(result.error?.issues[0]?.path).toContain("password");
@@ -78,25 +98,25 @@ describe("resetPasswordSchema", () => {
 describe("newPasswordSchema", () => {
   it("przepuszcza poprawne dane z pasującymi hasłami", () => {
     const result = newPasswordSchema.safeParse({
-      password: "newpassword1",
-      confirmPassword: "newpassword1",
+      password: "StrongPass123",
+      confirmPassword: "StrongPass123",
     });
     expect(result.success).toBe(true);
   });
 
   it("odrzuca gdy hasła się różnią", () => {
     const result = newPasswordSchema.safeParse({
-      password: "newpassword1",
+      password: "StrongPass123",
       confirmPassword: "different",
     });
     expect(result.success).toBe(false);
     expect(result.error?.issues[0]?.path).toContain("confirmPassword");
   });
 
-  it("odrzuca hasło krótsze niż 8 znaków", () => {
+  it("odrzuca hasło krótsze niż 12 znaków", () => {
     const result = newPasswordSchema.safeParse({
-      password: "short",
-      confirmPassword: "short",
+      password: "Short1",
+      confirmPassword: "Short1",
     });
     expect(result.success).toBe(false);
     expect(result.error?.issues[0]?.path).toContain("password");

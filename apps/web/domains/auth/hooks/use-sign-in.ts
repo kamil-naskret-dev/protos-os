@@ -10,12 +10,13 @@ export function useSignIn(callbackUrl = "/") {
   const router = useRouter();
   const [serverError, setServerError] = useState<string | null>(null);
 
-  async function signIn(values: LoginFormValues): Promise<boolean> {
+  async function signIn(values: LoginFormValues, captchaToken?: string): Promise<boolean> {
     setServerError(null);
     const supabase = createClient({ persistSession: values.rememberMe });
     const { error } = await supabase.auth.signInWithPassword({
       email: values.email,
       password: values.password,
+      ...(captchaToken && { options: { captchaToken } }),
     });
 
     if (error) {
